@@ -13,6 +13,7 @@
 @end
 
 @implementation NXRemindItemsViewController
+@synthesize titleString;
 
 - (void)viewDidLoad
 {
@@ -29,7 +30,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.dataLabel.text = [self.dataObject description];
+
+    self.dataLabel.text = titleString;
 }
 
 @end

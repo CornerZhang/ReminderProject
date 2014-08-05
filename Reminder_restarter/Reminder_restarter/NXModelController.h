@@ -10,7 +10,16 @@
 
 @class NXRemindItemsViewController;
 
+@interface NXPageRecord: NSObject
+@property (nonatomic) id pageView;
+@property BOOL used;
+
+- (instancetype)init;
+
+@end
+
 @interface NXModelController : NSObject <UIPageViewControllerDataSource>
+@property (strong, nonatomic) NSMutableArray* contentPageViews;
 
 - (NXRemindItemsViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(NXRemindItemsViewController *)viewController;

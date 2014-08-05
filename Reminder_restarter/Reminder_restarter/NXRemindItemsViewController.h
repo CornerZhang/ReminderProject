@@ -11,6 +11,6 @@
 @interface NXRemindItemsViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UILabel *dataLabel;
-@property (strong, nonatomic) id dataObject;
+@property (strong, nonatomic) NSString* titleString;
 
 @end

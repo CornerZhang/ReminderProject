@@ -7,8 +7,22 @@
 //
 
 #import "NXModelController.h"
-
 #import "NXRemindItemsViewController.h"
+
+@implementation NXPageRecord
+@synthesize pageView;
+@synthesize used;
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        pageView = nil;
+        used = NO;
+    }
+    return self;
+}
+
+@end
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -32,6 +46,14 @@
         // Create the data model.
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         _pageData = [[dateFormatter monthSymbols] copy];
+        
+        _contentPageViews = [[NSMutableArray alloc] init];
+        for (int i=0; i<[_pageData count]; ++i) {
+            const NXPageRecord* pageRecord = [[NXPageRecord alloc] init];
+            [_contentPageViews addObject:pageRecord];	// NSArray内不能放nil对象指针
+        }
+        NSLog(@"pages count %d", [_contentPageViews count]);
+
     }
     return self;
 }
@@ -43,17 +65,32 @@
         return nil;
     }
     
-    // Create a new view controller and pass suitable data.
-    NXRemindItemsViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"NXRemindItemsViewController"];
-    dataViewController.dataObject = self.pageData[index];
-    return dataViewController;
+    NXPageRecord* pageRecord = [_contentPageViews objectAtIndex:index];
+    if ( pageRecord.used == NO) {
+
+        // Create a new view controller and pass suitable data.
+        NXRemindItemsViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"NXRemindItemsViewController"];
+        
+        dataViewController.titleString = self.pageData[index];
+        
+        pageRecord.pageView = dataViewController;
+        pageRecord.used = YES;
+    }
+    
+    return pageRecord.pageView;
 }
 
 - (NSUInteger)indexOfViewController:(NXRemindItemsViewController *)viewController
-{   
-     // Return the index of the given data view controller.
-     // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
-    return [self.pageData indexOfObject:viewController.dataObject];
+{       
+    BOOL (^condition)(NXPageRecord* , NSUInteger , BOOL *) = ^(NXPageRecord* obj, NSUInteger idx, BOOL *stop)
+    {
+        if (obj.pageView == viewController) {
+            return YES;
+        }
+        return NO;
+    };
+    
+    return [_contentPageViews indexOfObjectPassingTest:condition];
 }
 
 #pragma mark - Page View Controller Data Source
