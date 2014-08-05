@@ -7,12 +7,15 @@
 //
 
 #import "NXAppDelegate.h"
+#import "NXDataStorage.h"
 
 @implementation NXAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [NXDataStorage sharedInstance];
+    
     return YES;
 }
 

@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class NXDataViewController;
+@class NXRemindItemsViewController;
 
 @interface NXModelController : NSObject <UIPageViewControllerDataSource>
 
-- (NXDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
-- (NSUInteger)indexOfViewController:(NXDataViewController *)viewController;
+- (NXRemindItemsViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
+- (NSUInteger)indexOfViewController:(NXRemindItemsViewController *)viewController;
 
 @end

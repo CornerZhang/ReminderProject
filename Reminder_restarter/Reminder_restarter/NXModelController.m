@@ -8,7 +8,7 @@
 
 #import "NXModelController.h"
 
-#import "NXDataViewController.h"
+#import "NXRemindItemsViewController.h"
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -36,7 +36,7 @@
     return self;
 }
 
-- (NXDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
+- (NXRemindItemsViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
 {   
     // Return the data view controller for the given index.
     if (([self.pageData count] == 0) || (index >= [self.pageData count])) {
@@ -44,12 +44,12 @@
     }
     
     // Create a new view controller and pass suitable data.
-    NXDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"NXDataViewController"];
+    NXRemindItemsViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"NXRemindItemsViewController"];
     dataViewController.dataObject = self.pageData[index];
     return dataViewController;
 }
 
-- (NSUInteger)indexOfViewController:(NXDataViewController *)viewController
+- (NSUInteger)indexOfViewController:(NXRemindItemsViewController *)viewController
 {   
      // Return the index of the given data view controller.
      // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
@@ -60,7 +60,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [self indexOfViewController:(NXDataViewController *)viewController];
+    NSUInteger index = [self indexOfViewController:(NXRemindItemsViewController *)viewController];
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
@@ -71,7 +71,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [self indexOfViewController:(NXDataViewController *)viewController];
+    NSUInteger index = [self indexOfViewController:(NXRemindItemsViewController *)viewController];
     if (index == NSNotFound) {
         return nil;
     }

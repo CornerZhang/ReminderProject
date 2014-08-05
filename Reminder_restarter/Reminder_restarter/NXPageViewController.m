@@ -8,7 +8,9 @@
 
 #import "NXPageViewController.h"
 #import "NXModelController.h"
-#import "NXDataViewController.h"
+#import "NXRemindItemsViewController.h"
+#import "NXDataStorage.h"
+#import "Page.h"
 
 @interface NXPageViewController ()
 @property (readonly, strong, nonatomic) NXModelController *modelController;
@@ -27,7 +29,6 @@
     _modelController = [[NXModelController alloc] init];
     
     self.delegate = self;
-
     self.dataSource = self.modelController;
 
     // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
@@ -37,7 +38,16 @@
     }
     self.view.frame = pageViewRect;
 
-    NXDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
+    // init first page view
+    // 如果第一次启动，创建第一个演示页
+    // 如果已经有一些页，就载入第一页和第二页的数据
+    
+    NXDataStorage* storage = [NXDataStorage sharedInstance];
+//    if ( [storage isEmpty] ) {
+//        Page* firstPage = [storage createBlankPage];
+//    }
+    
+    NXRemindItemsViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
     NSArray *viewControllers = @[startingViewController];
     [self setViewControllers:viewControllers
                    direction:UIPageViewControllerNavigationDirectionForward
@@ -76,7 +86,7 @@
     }
 
     // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
-    NXDataViewController *currentViewController = self.viewControllers[0];
+    NXRemindItemsViewController *currentViewController = self.viewControllers[0];
     NSArray *viewControllers = nil;
 
     NSUInteger indexOfCurrentViewController = [self.modelController indexOfViewController:currentViewController];

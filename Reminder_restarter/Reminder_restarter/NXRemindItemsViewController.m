@@ -1,18 +1,18 @@
 //
-//  NXDataViewController.m
+//  NXRemindItemsViewController.m
 //  Reminder_restarter
 //
 //  Created by CornerZhang on 14-8-4.
 //  Copyright (c) 2014年 NeXtreme.com. All rights reserved.
 //
 
-#import "NXDataViewController.h"
+#import "NXRemindItemsViewController.h"
 
-@interface NXDataViewController ()
+@interface NXRemindItemsViewController ()
 
 @end
 
-@implementation NXDataViewController
+@implementation NXRemindItemsViewController
 
 - (void)viewDidLoad
 {

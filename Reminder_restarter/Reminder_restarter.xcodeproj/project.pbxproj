@@ -14,7 +14,7 @@
 		651EC80F198F12C700E233B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC80E198F12C700E233B0 /* main.m */; };
 		651EC813198F12C700E233B0 /* NXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC812198F12C700E233B0 /* NXAppDelegate.m */; };
 		651EC816198F12C700E233B0 /* NXPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC815198F12C700E233B0 /* NXPageViewController.m */; };
-		651EC819198F12C700E233B0 /* NXDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC818198F12C700E233B0 /* NXDataViewController.m */; };
+		651EC819198F12C700E233B0 /* NXRemindItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC818198F12C700E233B0 /* NXRemindItemsViewController.m */; };
 		651EC81C198F12C700E233B0 /* NXModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC81B198F12C700E233B0 /* NXModelController.m */; };
 		651EC81F198F12C700E233B0 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 651EC81D198F12C700E233B0 /* Main_iPhone.storyboard */; };
 		651EC822198F12C700E233B0 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 651EC820198F12C700E233B0 /* Main_iPad.storyboard */; };
@@ -24,6 +24,9 @@
 		651EC82D198F12C800E233B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 651EC806198F12C700E233B0 /* UIKit.framework */; };
 		651EC835198F12C800E233B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 651EC833198F12C800E233B0 /* InfoPlist.strings */; };
 		651EC837198F12C800E233B0 /* Reminder_restarterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC836198F12C800E233B0 /* Reminder_restarterTests.m */; };
+		65FEFFCE1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65FEFFCC1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld */; };
+		65FEFFD41990D9270007E10D /* NXDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FEFFD31990D9270007E10D /* NXDataStorage.m */; };
+		65FEFFD71990DAB40007E10D /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FEFFD61990DAB40007E10D /* Page.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +52,8 @@
 		651EC812198F12C700E233B0 /* NXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXAppDelegate.m; sourceTree = "<group>"; };
 		651EC814198F12C700E233B0 /* NXPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXPageViewController.h; sourceTree = "<group>"; };
 		651EC815198F12C700E233B0 /* NXPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXPageViewController.m; sourceTree = "<group>"; };
-		651EC817198F12C700E233B0 /* NXDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXDataViewController.h; sourceTree = "<group>"; };
-		651EC818198F12C700E233B0 /* NXDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXDataViewController.m; sourceTree = "<group>"; };
+		651EC817198F12C700E233B0 /* NXRemindItemsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXRemindItemsViewController.h; sourceTree = "<group>"; };
+		651EC818198F12C700E233B0 /* NXRemindItemsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXRemindItemsViewController.m; sourceTree = "<group>"; };
 		651EC81A198F12C700E233B0 /* NXModelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXModelController.h; sourceTree = "<group>"; };
 		651EC81B198F12C700E233B0 /* NXModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXModelController.m; sourceTree = "<group>"; };
 		651EC81E198F12C700E233B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
@@ -61,6 +64,11 @@
 		651EC832198F12C800E233B0 /* Reminder_restarterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Reminder_restarterTests-Info.plist"; sourceTree = "<group>"; };
 		651EC834198F12C800E233B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		651EC836198F12C800E233B0 /* Reminder_restarterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reminder_restarterTests.m; sourceTree = "<group>"; };
+		65FEFFCD1990D7FB0007E10D /* PagedRemindItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PagedRemindItem.xcdatamodel; sourceTree = "<group>"; };
+		65FEFFD21990D9270007E10D /* NXDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXDataStorage.h; sourceTree = "<group>"; };
+		65FEFFD31990D9270007E10D /* NXDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXDataStorage.m; sourceTree = "<group>"; };
+		65FEFFD51990DAB40007E10D /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
+		65FEFFD61990DAB40007E10D /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,12 +128,13 @@
 		651EC808198F12C700E233B0 /* Reminder_restarter */ = {
 			isa = PBXGroup;
 			children = (
+				65FEFFCB1990D79A0007E10D /* DataStorage */,
 				651EC811198F12C700E233B0 /* NXAppDelegate.h */,
 				651EC812198F12C700E233B0 /* NXAppDelegate.m */,
 				651EC814198F12C700E233B0 /* NXPageViewController.h */,
 				651EC815198F12C700E233B0 /* NXPageViewController.m */,
-				651EC817198F12C700E233B0 /* NXDataViewController.h */,
-				651EC818198F12C700E233B0 /* NXDataViewController.m */,
+				651EC817198F12C700E233B0 /* NXRemindItemsViewController.h */,
+				651EC818198F12C700E233B0 /* NXRemindItemsViewController.m */,
 				651EC81A198F12C700E233B0 /* NXModelController.h */,
 				651EC81B198F12C700E233B0 /* NXModelController.m */,
 				651EC81D198F12C700E233B0 /* Main_iPhone.storyboard */,
@@ -163,6 +172,18 @@
 				651EC833198F12C800E233B0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65FEFFCB1990D79A0007E10D /* DataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				65FEFFD51990DAB40007E10D /* Page.h */,
+				65FEFFD61990DAB40007E10D /* Page.m */,
+				65FEFFCC1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld */,
+				65FEFFD21990D9270007E10D /* NXDataStorage.h */,
+				65FEFFD31990D9270007E10D /* NXDataStorage.m */,
+			);
+			name = DataStorage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,11 +285,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				651EC819198F12C700E233B0 /* NXDataViewController.m in Sources */,
+				651EC819198F12C700E233B0 /* NXRemindItemsViewController.m in Sources */,
 				651EC816198F12C700E233B0 /* NXPageViewController.m in Sources */,
+				65FEFFD41990D9270007E10D /* NXDataStorage.m in Sources */,
 				651EC813198F12C700E233B0 /* NXAppDelegate.m in Sources */,
 				651EC81C198F12C700E233B0 /* NXModelController.m in Sources */,
 				651EC80F198F12C700E233B0 /* main.m in Sources */,
+				65FEFFD71990DAB40007E10D /* Page.m in Sources */,
+				65FEFFCE1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +519,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		65FEFFCC1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				65FEFFCD1990D7FB0007E10D /* PagedRemindItem.xcdatamodel */,
+			);
+			currentVersion = 65FEFFCD1990D7FB0007E10D /* PagedRemindItem.xcdatamodel */;
+			path = PagedRemindItem.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 651EC7F7198F12C700E233B0 /* Project object */;
 }
