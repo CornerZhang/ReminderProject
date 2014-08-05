@@ -13,7 +13,7 @@
 		651EC80D198F12C700E233B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 651EC80B198F12C700E233B0 /* InfoPlist.strings */; };
 		651EC80F198F12C700E233B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC80E198F12C700E233B0 /* main.m */; };
 		651EC813198F12C700E233B0 /* NXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC812198F12C700E233B0 /* NXAppDelegate.m */; };
-		651EC816198F12C700E233B0 /* NXRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC815198F12C700E233B0 /* NXRootViewController.m */; };
+		651EC816198F12C700E233B0 /* NXPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC815198F12C700E233B0 /* NXPageViewController.m */; };
 		651EC819198F12C700E233B0 /* NXDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC818198F12C700E233B0 /* NXDataViewController.m */; };
 		651EC81C198F12C700E233B0 /* NXModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC81B198F12C700E233B0 /* NXModelController.m */; };
 		651EC81F198F12C700E233B0 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 651EC81D198F12C700E233B0 /* Main_iPhone.storyboard */; };
@@ -47,8 +47,8 @@
 		651EC810198F12C700E233B0 /* Reminder_restarter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Reminder_restarter-Prefix.pch"; sourceTree = "<group>"; };
 		651EC811198F12C700E233B0 /* NXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXAppDelegate.h; sourceTree = "<group>"; };
 		651EC812198F12C700E233B0 /* NXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXAppDelegate.m; sourceTree = "<group>"; };
-		651EC814198F12C700E233B0 /* NXRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXRootViewController.h; sourceTree = "<group>"; };
-		651EC815198F12C700E233B0 /* NXRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXRootViewController.m; sourceTree = "<group>"; };
+		651EC814198F12C700E233B0 /* NXPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXPageViewController.h; sourceTree = "<group>"; };
+		651EC815198F12C700E233B0 /* NXPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXPageViewController.m; sourceTree = "<group>"; };
 		651EC817198F12C700E233B0 /* NXDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXDataViewController.h; sourceTree = "<group>"; };
 		651EC818198F12C700E233B0 /* NXDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXDataViewController.m; sourceTree = "<group>"; };
 		651EC81A198F12C700E233B0 /* NXModelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXModelController.h; sourceTree = "<group>"; };
@@ -122,8 +122,8 @@
 			children = (
 				651EC811198F12C700E233B0 /* NXAppDelegate.h */,
 				651EC812198F12C700E233B0 /* NXAppDelegate.m */,
-				651EC814198F12C700E233B0 /* NXRootViewController.h */,
-				651EC815198F12C700E233B0 /* NXRootViewController.m */,
+				651EC814198F12C700E233B0 /* NXPageViewController.h */,
+				651EC815198F12C700E233B0 /* NXPageViewController.m */,
 				651EC817198F12C700E233B0 /* NXDataViewController.h */,
 				651EC818198F12C700E233B0 /* NXDataViewController.m */,
 				651EC81A198F12C700E233B0 /* NXModelController.h */,
@@ -265,7 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				651EC819198F12C700E233B0 /* NXDataViewController.m in Sources */,
-				651EC816198F12C700E233B0 /* NXRootViewController.m in Sources */,
+				651EC816198F12C700E233B0 /* NXPageViewController.m in Sources */,
 				651EC813198F12C700E233B0 /* NXAppDelegate.m in Sources */,
 				651EC81C198F12C700E233B0 /* NXModelController.m in Sources */,
 				651EC80F198F12C700E233B0 /* main.m in Sources */,
@@ -483,6 +483,7 @@
 				651EC83C198F12C800E233B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		651EC83D198F12C800E233B0 /* Build configuration list for PBXNativeTarget "Reminder_restarterTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +492,7 @@
 				651EC83F198F12C800E233B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
