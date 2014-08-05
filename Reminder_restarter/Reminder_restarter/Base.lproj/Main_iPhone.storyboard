@@ -12,10 +12,10 @@
             </objects>
             <point key="canvasLocation" x="288" y="476"/>
         </scene>
-        <!--Data View Controller-->
+        <!--Remind Items View Controller-->
         <scene sceneID="3qM-eY-iJ1">
             <objects>
-                <viewController storyboardIdentifier="NXDataViewController" id="hzS-jB-y9W" customClass="NXDataViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NXRemindItemsViewController" id="hzS-jB-y9W" customClass="NXRemindItemsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6LC-1I-4vP"/>
                         <viewControllerLayoutGuide type="bottom" id="a4F-Wq-f2I"/>
@@ -62,7 +62,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dataLabel" destination="i7n-lc-4In" id="8Kj-KN-eO6"/>
+                        <outlet property="dataLabel" destination="i7n-lc-4In" id="ynV-4s-cG9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHE-GN-Yf3" sceneMemberID="firstResponder"/>
