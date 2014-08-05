@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Page;
+
 @interface NXDataStorage : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -17,8 +19,11 @@
 
 + (instancetype) sharedInstance;
 
+- (BOOL)		isEmpty;
+
 - (void)		saveContext;
 - (NSURL *)		applicationDocumentsDirectory;
 
+- (Page*)		createBlankRemindItemWithPageNumber;
 
 @end

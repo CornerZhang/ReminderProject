@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NXPageViewController : UIPageViewController <UIPageViewControllerDelegate>
+@property (assign, nonatomic) NSUInteger pageLimited;
 
 @end

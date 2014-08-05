@@ -24,6 +24,8 @@
 
 @end
 
+
+
 /*
  A controller object that manages a simple model -- a collection of month names.
  
@@ -34,7 +36,7 @@
  */
 
 @interface NXModelController()
-@property (readonly, strong, nonatomic) NSArray *pageData;
+@property (readonly, strong, nonatomic) NSArray *pageData;	// will be delete
 @end
 
 @implementation NXModelController
@@ -45,7 +47,7 @@
     if (self) {
         // Create the data model.
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];
+        _pageData = [[dateFormatter monthSymbols] copy];	// will be delete
         
         _contentPageViews = [[NSMutableArray alloc] init];
         for (int i=0; i<[_pageData count]; ++i) {

@@ -15,8 +15,10 @@
 @property BOOL used;
 
 - (instancetype)init;
-
 @end
+
+
+
 
 @interface NXModelController : NSObject <UIPageViewControllerDataSource>
 @property (strong, nonatomic) NSMutableArray* contentPageViews;

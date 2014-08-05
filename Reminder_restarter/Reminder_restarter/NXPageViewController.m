@@ -12,12 +12,14 @@
 #import "NXDataStorage.h"
 #import "Page.h"
 
-@interface NXPageViewController ()
+@interface NXPageViewController () {
+    
+}
 @property (readonly, strong, nonatomic) NXModelController *modelController;
 @end
 
 @implementation NXPageViewController
-
+@synthesize pageLimited;
 @synthesize modelController = _modelController;
 
 - (void)viewDidLoad
@@ -26,6 +28,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     // Configure the page view controller and add it as a child view controller.
 
+    pageLimited = 12;
     _modelController = [[NXModelController alloc] init];
     
     self.delegate = self;

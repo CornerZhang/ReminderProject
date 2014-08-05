@@ -7,6 +7,7 @@
 //
 
 #import "NXDataStorage.h"
+#import "Page.h"
 
 @interface NXDataStorage () <NSFetchedResultsControllerDelegate> {
     
@@ -61,8 +62,19 @@ static NXDataStorage* only = nil;
         NSLog(@"Failed to fetch.");
     }
     
+    BOOL empty = [self isEmpty];
+    
     NSLog(@"RMStorageManager msg: %@",NSStringFromSelector(_cmd));
     return self;
+}
+
+- (BOOL)isEmpty {
+    NSArray* elemments = self.frc.fetchedObjects;
+    if ([elemments count]!=0) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)saveContext
@@ -77,6 +89,17 @@ static NXDataStorage* only = nil;
             abort();
         }
     }
+}
+
+- (Page*) createBlankRemindItemWithPageNumber {
+    
+    Page* newPage = [NSEntityDescription insertNewObjectForEntityForName:[self.entityDesc name]
+                                                        inManagedObjectContext:self.managedObjectContext];
+    NSManagedObject* lastItem = [self.frc.fetchedObjects lastObject];
+    NSInteger lastOrder = [[lastItem valueForKey:@"pageNumber"] unsignedIntegerValue];
+    newPage.pageNumber  = [NSNumber numberWithUnsignedInteger:lastOrder+1];
+    
+    return newPage;
 }
 
 #pragma mark - Application's Documents directory
