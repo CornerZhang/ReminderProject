@@ -10,7 +10,7 @@
 
 @interface NXRemindItemsViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *dataLabel;
+@property (strong, nonatomic) IBOutlet UITextField *pageName;
 @property (strong, nonatomic) NSString* titleString;
 
 @end

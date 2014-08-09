@@ -26,4 +26,7 @@
 - (NXRemindItemsViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(NXRemindItemsViewController *)viewController;
 
+- (BOOL)existContextPageIndex:(NSUInteger)index;
+- (NXPageRecord*)getPageRecordIndex:(NSUInteger)index;
+
 @end

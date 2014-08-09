@@ -12,6 +12,8 @@
 #import "NXDataStorage.h"
 #import "Page.h"
 
+#define DEBUG 1
+
 @interface NXPageViewController () {
     
 }
@@ -40,22 +42,35 @@
         pageViewRect = CGRectInset(pageViewRect, 40.0, 40.0);
     }
     self.view.frame = pageViewRect;
-
-    // init first page view
-    // 如果第一次启动，创建第一个演示页
-    // 如果已经有一些页，就载入第一页和第二页的数据
-    
-    NXDataStorage* storage = [NXDataStorage sharedInstance];
-//    if ( [storage isEmpty] ) {
-//        Page* firstPage = [storage createBlankPage];
-//    }
     
     NXRemindItemsViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
+
+    NXDataStorage* storage = [NXDataStorage sharedInstance];
+    if ( [storage isEmpty] ) {
+        // 如果第一次启动，创建第一个演示页
+        Page* firstNewPage = [storage createBlankPageWithPageNumber];
+        firstNewPage.name = [NSString stringWithFormat:@"新页 %@", firstNewPage.pageNumber];
+#if DEBUG
+    NSLog(@"Running %@ '%@' -- first new page", self.class, NSStringFromSelector(_cmd));
+#endif
+        
+        startingViewController.titleString = firstNewPage.name;
+    }else{
+        // 载入页的缓冲数据，和当前显示页的表数据
+        Page* getFirstPage = [storage getPageAtIndex:0];
+#if DEBUG
+    NSLog(@"Running %@ '%@' -- get exist page", self.class, NSStringFromSelector(_cmd));
+#endif
+
+        startingViewController.titleString = getFirstPage.name;
+    }
+
     NSArray *viewControllers = @[startingViewController];
     [self setViewControllers:viewControllers
                    direction:UIPageViewControllerNavigationDirectionForward
                     animated:NO
                   completion:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning

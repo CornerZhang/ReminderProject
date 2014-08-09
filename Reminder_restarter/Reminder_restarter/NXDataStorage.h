@@ -21,9 +21,12 @@
 
 - (BOOL)		isEmpty;
 
+- (void)		saveContextWhenChanged;
 - (void)		saveContext;
 - (NSURL *)		applicationDocumentsDirectory;
 
-- (Page*)		createBlankRemindItemWithPageNumber;
+- (Page*)		createBlankPageWithPageNumber;
+- (Page*)		getPageAtIndex:(NSInteger)index;
+- (Page*)		getPageAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

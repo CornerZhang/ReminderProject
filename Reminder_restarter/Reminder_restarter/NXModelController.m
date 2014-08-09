@@ -8,6 +8,8 @@
 
 #import "NXModelController.h"
 #import "NXRemindItemsViewController.h"
+#import "NXDataStorage.h"
+#import "Page.h"
 
 @implementation NXPageRecord
 @synthesize pageView;
@@ -35,8 +37,10 @@
  There is no need to actually create view controllers for each page in advance -- indeed doing so incurs unnecessary overhead. Given the data model, these methods create, configure, and return a new view controller on demand.
  */
 
-@interface NXModelController()
-@property (readonly, strong, nonatomic) NSArray *pageData;	// will be delete
+@interface NXModelController() {
+    NSUInteger pageNumberLimited;
+    NXDataStorage* dataStorage;
+}
 @end
 
 @implementation NXModelController
@@ -46,15 +50,15 @@
     self = [super init];
     if (self) {
         // Create the data model.
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];	// will be delete
+        pageNumberLimited = 5;	// [0,6)
+        dataStorage = [NXDataStorage sharedInstance];
         
         _contentPageViews = [[NSMutableArray alloc] init];
-        for (int i=0; i<[_pageData count]; ++i) {
+        for (int i=0; i<=pageNumberLimited; ++i) {
             const NXPageRecord* pageRecord = [[NXPageRecord alloc] init];
             [_contentPageViews addObject:pageRecord];	// NSArray内不能放nil对象指针
         }
-        NSLog(@"pages count %d", [_contentPageViews count]);
+        NSLog(@"ready pages count %d", [_contentPageViews count]);
 
     }
     return self;
@@ -63,18 +67,15 @@
 - (NXRemindItemsViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
 {   
     // Return the data view controller for the given index.
-    if (([self.pageData count] == 0) || (index >= [self.pageData count])) {
+    if (index >= pageNumberLimited) {
         return nil;
     }
     
     NXPageRecord* pageRecord = [_contentPageViews objectAtIndex:index];
     if ( pageRecord.used == NO) {
-
-        // Create a new view controller and pass suitable data.
+        // Create a new view controller
         NXRemindItemsViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"NXRemindItemsViewController"];
-        
-        dataViewController.titleString = self.pageData[index];
-        
+                
         pageRecord.pageView = dataViewController;
         pageRecord.used = YES;
     }
@@ -84,7 +85,7 @@
 
 - (NSUInteger)indexOfViewController:(NXRemindItemsViewController *)viewController
 {       
-    BOOL (^condition)(NXPageRecord* , NSUInteger , BOOL *) = ^(NXPageRecord* obj, NSUInteger idx, BOOL *stop)
+    BOOL (^findCondition)(NXPageRecord* , NSUInteger , BOOL *) = ^(NXPageRecord* obj, NSUInteger idx, BOOL *stop)
     {
         if (obj.pageView == viewController) {
             return YES;
@@ -92,7 +93,16 @@
         return NO;
     };
     
-    return [_contentPageViews indexOfObjectPassingTest:condition];
+    return [_contentPageViews indexOfObjectPassingTest:findCondition];
+}
+
+- (BOOL)existContextPageIndex:(NSUInteger)index {
+    NXPageRecord* record = [_contentPageViews objectAtIndex:index];
+    return record.used;
+}
+
+- (NXPageRecord*)getPageRecordIndex:(NSUInteger)index {
+    return [_contentPageViews objectAtIndex:index];
 }
 
 #pragma mark - Page View Controller Data Source
@@ -104,22 +114,40 @@
         return nil;
     }
     
+    [dataStorage saveContext];
     index--;
-    return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
+    
+    NXRemindItemsViewController* pageView =  [self viewControllerAtIndex:index storyboard:viewController.storyboard];
+
+    return pageView;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     NSUInteger index = [self indexOfViewController:(NXRemindItemsViewController *)viewController];
-    if (index == NSNotFound) {
+    if ((index >= pageNumberLimited) || index == NSNotFound) {
         return nil;
     }
     
+    [dataStorage saveContext];
     index++;
-    if (index == [self.pageData count]) {
-        return nil;
+    
+    NXRemindItemsViewController *pageView = nil;
+    NXPageRecord* record = [self getPageRecordIndex:index];
+    if ( !record.used ) {
+        // create a new page
+        Page* newPage = [dataStorage createBlankPageWithPageNumber];
+        pageView = [pageViewController.storyboard instantiateViewControllerWithIdentifier:@"NXRemindItemsViewController"];
+        record.pageView = pageView;
+        record.used = YES;
+        
+        pageView.titleString = [NSString stringWithFormat:@"新页 %@", newPage.pageNumber];
+    }else{
+        // get the page data to view
+        pageView = [self viewControllerAtIndex:index storyboard:viewController.storyboard];
     }
-    return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
+    
+    return pageView;
 }
 
 @end

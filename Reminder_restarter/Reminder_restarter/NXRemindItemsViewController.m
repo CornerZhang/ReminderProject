@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
 
-    self.dataLabel.text = titleString;
+    self.pageName.text = titleString;
 }
 
 @end

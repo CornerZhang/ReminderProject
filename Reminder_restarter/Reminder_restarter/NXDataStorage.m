@@ -61,23 +61,20 @@ static NXDataStorage* only = nil;
     } else {
         NSLog(@"Failed to fetch.");
     }
-    
-    BOOL empty = [self isEmpty];
-    
+        
     NSLog(@"RMStorageManager msg: %@",NSStringFromSelector(_cmd));
     return self;
 }
 
 - (BOOL)isEmpty {
-    NSArray* elemments = self.frc.fetchedObjects;
-    if ([elemments count]!=0) {
-        return NO;
+    if ([self.frc.sections lastObject] == nil) {	// checking code...
+        return YES;
     }
     
-    return YES;
+    return NO;
 }
 
-- (void)saveContext
+- (void)saveContextWhenChanged
 {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
@@ -91,15 +88,34 @@ static NXDataStorage* only = nil;
     }
 }
 
-- (Page*) createBlankRemindItemWithPageNumber {
+- (void)saveContext {
+    NSError *savingError = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if ([managedObjectContext save:&savingError]){
+        NSLog(@"Successfully fetched.");
+    } else {
+        NSLog(@"Failed to fetch.");
+    }
+}
+
+- (Page*) createBlankPageWithPageNumber {
     
     Page* newPage = [NSEntityDescription insertNewObjectForEntityForName:[self.entityDesc name]
                                                         inManagedObjectContext:self.managedObjectContext];
-    NSManagedObject* lastItem = [self.frc.fetchedObjects lastObject];
+    NSManagedObject* lastItem = [self.frc.sections[0] lastObject];
     NSInteger lastOrder = [[lastItem valueForKey:@"pageNumber"] unsignedIntegerValue];
     newPage.pageNumber  = [NSNumber numberWithUnsignedInteger:lastOrder+1];
     
     return newPage;
+}
+
+- (Page*)		getPageAtIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    return [self getPageAtIndexPath:indexPath];
+}
+
+- (Page*) getPageAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.frc.fetchedObjects objectAtIndex:indexPath.row];
 }
 
 #pragma mark - Application's Documents directory
