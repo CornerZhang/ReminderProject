@@ -67,7 +67,7 @@
 - (NXRemindItemsViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
 {   
     // Return the data view controller for the given index.
-    if (index >= pageNumberLimited) {
+    if (index > pageNumberLimited) {
         return nil;
     }
     
@@ -114,7 +114,7 @@
         return nil;
     }
     
-    [dataStorage saveContext];
+    [dataStorage saveContextWhenChanged];
     index--;
     
     NXRemindItemsViewController* pageView =  [self viewControllerAtIndex:index storyboard:viewController.storyboard];
@@ -129,19 +129,23 @@
         return nil;
     }
     
-    [dataStorage saveContext];
+    [dataStorage saveContextWhenChanged];
     index++;
     
     NXRemindItemsViewController *pageView = nil;
     NXPageRecord* record = [self getPageRecordIndex:index];
     if ( !record.used ) {
-        // create a new page
-        Page* newPage = [dataStorage createBlankPageWithPageNumber];
+        // create a new page data
+        Page* newPage = [dataStorage createBlankPage];
+        newPage.name = [NSString stringWithFormat:@"新页 %d", index+1];
+		newPage.pageNumber = [NSNumber numberWithUnsignedInteger:index+1];
+        
+        // create new page view
         pageView = [pageViewController.storyboard instantiateViewControllerWithIdentifier:@"NXRemindItemsViewController"];
         record.pageView = pageView;
         record.used = YES;
         
-        pageView.titleString = [NSString stringWithFormat:@"新页 %@", newPage.pageNumber];
+        pageView.titleString = newPage.name;
     }else{
         // get the page data to view
         pageView = [self viewControllerAtIndex:index storyboard:viewController.storyboard];

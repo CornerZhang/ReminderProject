@@ -67,7 +67,7 @@ static NXDataStorage* only = nil;
 }
 
 - (BOOL)isEmpty {
-    if ([self.frc.sections lastObject] == nil) {	// checking code...
+    if ([self.frc.fetchedObjects count] == 0) {
         return YES;
     }
     
@@ -99,14 +99,19 @@ static NXDataStorage* only = nil;
 }
 
 - (Page*) createBlankPageWithPageNumber {
+    Page* newPage = [self createBlankPage];
     
-    Page* newPage = [NSEntityDescription insertNewObjectForEntityForName:[self.entityDesc name]
-                                                        inManagedObjectContext:self.managedObjectContext];
-    NSManagedObject* lastItem = [self.frc.sections[0] lastObject];
+    NSManagedObject* lastItem = [self.frc.fetchedObjects lastObject];
     NSInteger lastOrder = [[lastItem valueForKey:@"pageNumber"] unsignedIntegerValue];
     newPage.pageNumber  = [NSNumber numberWithUnsignedInteger:lastOrder+1];
     
     return newPage;
+}
+
+- (Page*)		createBlankPage {
+    Page* newPage = [NSEntityDescription insertNewObjectForEntityForName:[self.entityDesc name]
+                                                  inManagedObjectContext:self.managedObjectContext];
+	return newPage;
 }
 
 - (Page*)		getPageAtIndex:(NSInteger)index {

@@ -48,8 +48,9 @@
     NXDataStorage* storage = [NXDataStorage sharedInstance];
     if ( [storage isEmpty] ) {
         // 如果第一次启动，创建第一个演示页
-        Page* firstNewPage = [storage createBlankPageWithPageNumber];
-        firstNewPage.name = [NSString stringWithFormat:@"新页 %@", firstNewPage.pageNumber];
+        Page* firstNewPage = [storage createBlankPage];
+        firstNewPage.name = [NSString stringWithFormat:@"新页 %d", 1];
+        firstNewPage.pageNumber = [NSNumber numberWithUnsignedInteger:1];
 #if DEBUG
     NSLog(@"Running %@ '%@' -- first new page", self.class, NSStringFromSelector(_cmd));
 #endif

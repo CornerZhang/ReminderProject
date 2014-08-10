@@ -26,6 +26,7 @@
 - (NSURL *)		applicationDocumentsDirectory;
 
 - (Page*)		createBlankPageWithPageNumber;
+- (Page*)		createBlankPage;
 - (Page*)		getPageAtIndex:(NSInteger)index;
 - (Page*)		getPageAtIndexPath:(NSIndexPath *)indexPath;
 
