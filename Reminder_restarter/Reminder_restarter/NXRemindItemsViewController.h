@@ -11,6 +11,7 @@
 @interface NXRemindItemsViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *pageName;
+@property (strong, nonatomic) IBOutlet UILabel *pageNumber;
 @property (strong, nonatomic) NSString* titleString;
-
+@property (assign, nonatomic) NSUInteger number;
 @end

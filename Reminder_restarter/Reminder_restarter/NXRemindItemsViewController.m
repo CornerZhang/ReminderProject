@@ -14,6 +14,7 @@
 
 @implementation NXRemindItemsViewController
 @synthesize titleString;
+@synthesize number;
 
 - (void)viewDidLoad
 {
@@ -32,6 +33,7 @@
     [super viewWillAppear:animated];
 
     self.pageName.text = titleString;
+    self.pageNumber.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.number];
 }
 
 @end

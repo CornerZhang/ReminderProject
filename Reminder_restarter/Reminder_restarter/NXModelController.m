@@ -11,6 +11,8 @@
 #import "NXDataStorage.h"
 #import "Page.h"
 
+#define DEBUG 1
+
 @implementation NXPageRecord
 @synthesize pageView;
 @synthesize used;
@@ -117,8 +119,15 @@
     [dataStorage saveContextWhenChanged];
     index--;
     
-    NXRemindItemsViewController* pageView =  [self viewControllerAtIndex:index storyboard:viewController.storyboard];
+#if DEBUG
+    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+#endif
 
+    NXRemindItemsViewController* pageView =  [self viewControllerAtIndex:index storyboard:viewController.storyboard];
+    Page* page = [dataStorage getPageAtIndex:index];
+    pageView.titleString = page.name;
+    pageView.number = [page.pageNumber unsignedIntegerValue];
+    
     return pageView;
 }
 
@@ -132,24 +141,15 @@
     [dataStorage saveContextWhenChanged];
     index++;
     
-    NXRemindItemsViewController *pageView = nil;
-    NXPageRecord* record = [self getPageRecordIndex:index];
-    if ( !record.used ) {
-        // create a new page data
-        Page* newPage = [dataStorage createBlankPage];
-        newPage.name = [NSString stringWithFormat:@"新页 %d", index+1];
-		newPage.pageNumber = [NSNumber numberWithUnsignedInteger:index+1];
-        
-        // create new page view
-        pageView = [pageViewController.storyboard instantiateViewControllerWithIdentifier:@"NXRemindItemsViewController"];
-        record.pageView = pageView;
-        record.used = YES;
-        
-        pageView.titleString = newPage.name;
-    }else{
-        // get the page data to view
-        pageView = [self viewControllerAtIndex:index storyboard:viewController.storyboard];
-    }
+#if DEBUG
+    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+#endif
+
+    NXRemindItemsViewController *pageView = [self viewControllerAtIndex:index storyboard:viewController.storyboard];
+    Page* page = [dataStorage getPageAtIndex:index];
+    pageView.titleString = page.name;
+    pageView.number = [page.pageNumber unsignedIntegerValue];
+
     
     return pageView;
 }

@@ -46,32 +46,39 @@
     NXRemindItemsViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
 
     NXDataStorage* storage = [NXDataStorage sharedInstance];
-    if ( [storage isEmpty] ) {
-        // 如果第一次启动，创建第一个演示页
-        Page* firstNewPage = [storage createBlankPage];
-        firstNewPage.name = [NSString stringWithFormat:@"新页 %d", 1];
-        firstNewPage.pageNumber = [NSNumber numberWithUnsignedInteger:1];
-#if DEBUG
-    NSLog(@"Running %@ '%@' -- first new page", self.class, NSStringFromSelector(_cmd));
-#endif
-        
-        startingViewController.titleString = firstNewPage.name;
-    }else{
-        // 载入页的缓冲数据，和当前显示页的表数据
-        Page* getFirstPage = [storage getPageAtIndex:0];
-#if DEBUG
-    NSLog(@"Running %@ '%@' -- get exist page", self.class, NSStringFromSelector(_cmd));
-#endif
-
-        startingViewController.titleString = getFirstPage.name;
-    }
-
+    Page* getFirstPage = [storage getPageAtIndex:0];
+    startingViewController.titleString = getFirstPage.name;
+    startingViewController.number = [getFirstPage.pageNumber unsignedIntegerValue];
+    
     NSArray *viewControllers = @[startingViewController];
     [self setViewControllers:viewControllers
                    direction:UIPageViewControllerNavigationDirectionForward
                     animated:NO
                   completion:nil];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+//    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+//        [self curlFirstPageView];
+//    }
+}
+
+- (void)curlFirstPageView {
+    CATransition* curlAnimation = [CATransition animation];	// 继承自CAAnimation
+    curlAnimation.delegate = self;
+    curlAnimation.duration = 0.2f;
+    curlAnimation.timingFunction = UIViewAnimationCurveEaseInOut;
+    
+    curlAnimation.type = @"pageCurl";
+    curlAnimation.endProgress = 0.25f;
+    
+	curlAnimation.fillMode = kCAFillModeForwards;
+    curlAnimation.subtype = kCATransitionFromBottom;
+    curlAnimation.removedOnCompletion = NO;
+    
+    [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+    [[self.view layer] addAnimation:curlAnimation forKey:@"PageCurlAnimation"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,44 +90,28 @@
 
 #pragma mark - UIPageViewController delegate methods
 
-/*
-- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+
+- (void)pageViewController:(UIPageViewController *)pageViewController
+        didFinishAnimating:(BOOL)finished
+   previousViewControllers:(NSArray *)previousViewControllers
+       transitionCompleted:(BOOL)completed
 {
-    
+#if DEBUG
+    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+#endif
+
 }
- */
+
 
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
                    spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    if (UIInterfaceOrientationIsPortrait(orientation) || ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)) {
-        // In portrait orientation or on iPhone: Set the spine position to "min" and the page view controller's view controllers array to contain just one view controller. Setting the spine position to 'UIPageViewControllerSpineLocationMid' in landscape orientation sets the doubleSided property to YES, so set it to NO here.
-        
-        UIViewController *currentViewController = self.viewControllers[0];
-        NSArray *viewControllers = @[currentViewController];
-        [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-        
-        self.doubleSided = NO;
-        return UIPageViewControllerSpineLocationMin;
-    }
-
-    // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
-    NXRemindItemsViewController *currentViewController = self.viewControllers[0];
-    NSArray *viewControllers = nil;
-
-    NSUInteger indexOfCurrentViewController = [self.modelController indexOfViewController:currentViewController];
-    if (indexOfCurrentViewController == 0 || indexOfCurrentViewController % 2 == 0) {
-        UIViewController *nextViewController = [self.modelController pageViewController:self viewControllerAfterViewController:currentViewController];
-        viewControllers = @[currentViewController, nextViewController];
-    } else {
-        UIViewController *previousViewController = [self.modelController pageViewController:self viewControllerBeforeViewController:currentViewController];
-        viewControllers = @[previousViewController, currentViewController];
-    }
-    
+    UIViewController *currentViewController = self.viewControllers[0];
+    NSArray *viewControllers = @[currentViewController];
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-
-
-    return UIPageViewControllerSpineLocationMid;
+    
+    self.doubleSided = NO;
+    return UIPageViewControllerSpineLocationMin;
 }
 
 @end
