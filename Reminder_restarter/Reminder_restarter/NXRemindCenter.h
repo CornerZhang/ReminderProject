@@ -27,8 +27,8 @@ typedef NS_ENUM(NSUInteger, NXWeekdays) {
 };
 
 @interface RemindItem (PostMessageExtension)
-@property (strong, nonatomic) NSTimeZone*	presentZone;
-@property (assign, nonatomic) NXWeekdays	weekdaysFlags;
+@property (strong, nonatomic) NSTimeZone*	presentZone;	// will modify
+@property (assign, nonatomic, readonly) NXWeekdays	weekdaysFlags;
 @end
 
 @interface NXRemindCenter : NSObject <NSFetchedResultsControllerDelegate>

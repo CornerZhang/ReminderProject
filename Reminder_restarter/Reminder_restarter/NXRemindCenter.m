@@ -7,6 +7,9 @@
 //
 
 #import "NXRemindCenter.h"
+#import <EventKit/EventKit.h>
+
+NSString* CalendarIdentifyKey = @"RemindNote_AppCalendar";
 
 @implementation RemindItem (PostMessageExtension)
 @dynamic presentZone;
@@ -17,9 +20,11 @@
 @interface NXRemindCenter () {
     
 }
-@property (nonatomic, strong) NSFetchedResultsController* frc;
-@property (nonatomic, strong) NSEntityDescription* entityDesc;
+@property (strong, nonatomic) NSFetchedResultsController* frc;
+@property (strong, nonatomic) NSEntityDescription* entityDesc;
 
+@property (strong, nonatomic) EKEventStore* eventStore;
+@property (strong, nonatomic) EKCalendar*	calendar;
 @end
 
 static NXRemindCenter* only = nil;
@@ -42,6 +47,7 @@ static NXRemindCenter* only = nil;
 	self = [super init];
     
     //userDrivenDataModelChange = NO;
+    [self initEventKit];
     
     /* Create the fetch request first */
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -74,10 +80,20 @@ static NXRemindCenter* only = nil;
 
 	[self fetchResults];
 
+    // init page data
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        // create 6 new pages & blank remindItem
+        for (int i=0; i<6; ++i) {
+            Page* newPage = [self createBlankPage];
+            newPage.name = [NSString stringWithFormat:@"新页 %d", i+1];
+            newPage.pageNumber = [NSNumber numberWithUnsignedInteger:i+1];
+        }
+        [self saveContextWhenChanged];
+	}
+
     return self;
 }
 
-#pragma mark - Application's Documents directory
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
@@ -87,7 +103,61 @@ static NXRemindCenter* only = nil;
     
 }
 
-- (NSUInteger)numberOfFetchedObjects {
+- (void)initEventKit {
+    // event store
+    _eventStore = [[EKEventStore alloc] init];
+    
+    // request authorization
+    switch ([EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent]) {	// EKEntityTypeEvent: 事件; EKEntityTypeReminder: 提醒
+        case EKAuthorizationStatusAuthorized:
+            NSLog(@"EKAuthorizationStatusAuthorized");
+            break;
+            
+        case EKAuthorizationStatusDenied:
+            NSLog(@"EKAuthorizationStatusDenied");
+            break;
+            
+        case EKAuthorizationStatusNotDetermined: {
+            NSLog(@"EKAuthorizationStatusNotDetermined");
+            [_eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError* error){
+//                if (granted) {
+//                    [self insertEventIntoStore:_eventStore];
+//                }else{
+//                    [self displayAccessDenied];
+//                }
+            }];
+            break;
+        }
+        case EKAuthorizationStatusRestricted:
+            NSLog(@"EKAuthorizationStatusRestricted");
+            break;
+    }
+    
+    // source
+    EKSource* foundLocalSource = nil;
+    for (EKSource* source in _eventStore.sources) {
+        if (source.sourceType == EKSourceTypeLocal) {
+            foundLocalSource = source;
+            NSLog(@"local source title - %@", foundLocalSource.title);
+        }
+    }
+    
+    // calendar
+    NSString* calenderIdentifier = [[NSUserDefaults standardUserDefaults] stringForKey:CalendarIdentifyKey];
+    _calendar = [_eventStore calendarWithIdentifier:calenderIdentifier];
+    if (_calendar==nil) {
+        _calendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:_eventStore];
+        _calendar.title = CalendarIdentifyKey;
+        _calendar.source = foundLocalSource;
+
+        if ( ![_eventStore saveCalendar:_calendar commit:YES error:nil] ) {
+            NSLog(@"Failed to save %@", _calendar.title);
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:_calendar.calendarIdentifier forKey:CalendarIdentifyKey];
+    }
+}
+
+- (NSUInteger)	numberOfFetchedObjects {
     return [self.frc.fetchedObjects count];
 }
 
