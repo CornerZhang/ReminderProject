@@ -26,38 +26,38 @@ typedef NS_ENUM(NSUInteger, NXWeekdays) {
     RMWeekday_Sun = 1<<6
 };
 
-@interface NXRemindMessage : RemindItem
+@interface RemindItem (PostMessageExtension)
 @property (strong, nonatomic) NSTimeZone*	presentZone;
 @property (assign, nonatomic) NXWeekdays	weekdaysFlags;
 @end
 
-@interface NXRemindCenter : NSObject
+@interface NXRemindCenter : NSObject <NSFetchedResultsControllerDelegate>
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (instancetype)sharedInstance;
 
-// post
-- (NXRemindMessage*)findMessageByName:(NSString*)name;
-- (NXRemindMessage*)createBlankMessage:(NSString*)name;
-
-- (void)		postMessage:(NXRemindMessage*)msg;
-- (void)		cancelMessage:(NXRemindMessage*)msg;
-- (void)		cancelAllMessages;
-
+- (NSURL *)		applicationDocumentsDirectory;
+- (void)		importItemsFromDevice;
 
 // data
-//- (BOOL)		importMessagesFromCenter;
-- (BOOL)		isEmpty;
-
-- (void)		saveContextWhenChanged;
-- (void)		saveContext;
-- (NSURL *)		applicationDocumentsDirectory;
-
+- (NSUInteger)	numberOfFetchedObjects;
+- (Page*)		findPageByIndex:(NSUInteger)index;
 - (Page*)		createBlankPageWithPageNumber;
 - (Page*)		createBlankPage;
 - (Page*)		getPageAtIndex:(NSInteger)index;
 - (Page*)		getPageAtIndexPath:(NSIndexPath *)indexPath;
+
+- (RemindItem*)	findItemByName:(NSString*)name;
+- (RemindItem*)	createBlankItem:(NSString*)name;
+
+- (void)		saveContextWhenChanged;
+- (void)		saveContext;
+
+// post & cancel some item
+- (void)		postItem:(RemindItem*)msg;
+- (void)		canceItem:(RemindItem*)msg;
+- (void)		cancelAllItems;
 
 @end

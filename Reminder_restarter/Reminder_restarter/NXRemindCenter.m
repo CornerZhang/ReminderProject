@@ -8,7 +8,13 @@
 
 #import "NXRemindCenter.h"
 
-@interface NXRemindCenter ()  <NSFetchedResultsControllerDelegate> {
+@implementation RemindItem (PostMessageExtension)
+@dynamic presentZone;
+@dynamic weekdaysFlags;
+
+@end
+
+@interface NXRemindCenter () {
     
 }
 @property (nonatomic, strong) NSFetchedResultsController* frc;
@@ -71,65 +77,23 @@ static NXRemindCenter* only = nil;
     return self;
 }
 
-- (NXRemindMessage*)findMessageByName:(NSString*)name {
-    return nil;
-}
-
-- (NXRemindMessage*)createBlankMessage:(NSString*)name {
-    return nil;
-}
-
-- (void)		postMessage:(NXRemindMessage*)msg {
-    
-}
-
-- (void)		cancelMessage:(NXRemindMessage*)msg {
-    
-}
-
-- (void)		cancelAllMessages {
-    
-}
-
-- (BOOL)isEmpty {
-    if ([self.frc.fetchedObjects count] == 0) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (void)fetchResults {
-    NSError *fetchingError = nil;
-    if ([self.frc performFetch:&fetchingError]){
-        NSLog(@"Successfully fetched.");
-    } else {
-        NSLog(@"Failed to fetch.");
-    }
-}
-
-- (void)saveContextWhenChanged
+#pragma mark - Application's Documents directory
+- (NSURL *)applicationDocumentsDirectory
 {
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-- (void)saveContext {
-    NSError *savingError = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if ([managedObjectContext save:&savingError]){
-        NSLog(@"Successfully fetched.");
-    } else {
-        NSLog(@"Failed to fetch.");
-    }
+- (void)		importItemsFromDevice {
+    
+}
+
+- (NSUInteger)numberOfFetchedObjects {
+    return [self.frc.fetchedObjects count];
+}
+
+- (Page*)		findPageByIndex:(NSUInteger)index {
+    return nil;
+    
 }
 
 - (Page*) createBlankPageWithPageNumber {
@@ -157,15 +121,60 @@ static NXRemindCenter* only = nil;
     return [self.frc.fetchedObjects objectAtIndex:indexPath.row];
 }
 
-#pragma mark - Application's Documents directory
+- (RemindItem*)findItemByName:(NSString*)name {
+    return nil;
+}
 
-// Returns the URL to the application's Documents directory.
-- (NSURL *)applicationDocumentsDirectory
+- (RemindItem*)createBlankItem:(NSString*)name {
+    return nil;
+}
+
+- (void)saveContextWhenChanged
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+
+- (void)saveContext {
+    NSError *savingError = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if ([managedObjectContext save:&savingError]){
+        NSLog(@"Successfully fetched.");
+    } else {
+        NSLog(@"Failed to fetch.");
+    }
+}
+
+- (void)		postItem:(RemindItem*)msg {
+    
+}
+
+- (void)		canceItem:(RemindItem*)msg {
+    
+}
+
+- (void)		cancelAllItems {
+    
 }
 
 #pragma mark - Core Data stack
+
+- (void)fetchResults {
+    NSError *fetchingError = nil;
+    if ([self.frc performFetch:&fetchingError]){
+        NSLog(@"Successfully fetched.");
+    } else {
+        NSLog(@"Failed to fetch.");
+    }
+}
 
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
