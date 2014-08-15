@@ -8,8 +8,7 @@
 
 #import "NXModelController.h"
 #import "NXRemindItemsViewController.h"
-#import "NXDataStorage.h"
-#import "Page.h"
+#import "NXRemindCenter.h"
 
 #define DEBUG 1
 
@@ -41,7 +40,7 @@
 
 @interface NXModelController() {
     NSUInteger pageNumberLimited;
-    NXDataStorage* dataStorage;
+    NXRemindCenter* dataStorage;
 }
 @end
 
@@ -53,7 +52,7 @@
     if (self) {
         // Create the data model.
         pageNumberLimited = 5;	// [0,6)
-        dataStorage = [NXDataStorage sharedInstance];
+        dataStorage = [NXRemindCenter sharedInstance];
         
         _contentPageViews = [[NSMutableArray alloc] init];
         for (int i=0; i<=pageNumberLimited; ++i) {

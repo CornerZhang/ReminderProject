@@ -7,14 +7,13 @@
 //
 
 #import "NXAppDelegate.h"
-#import "NXDataStorage.h"
+#import "NXRemindCenter.h"
 
 @implementation NXAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [NXDataStorage sharedInstance];
     
     if ( ![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"] ) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
@@ -23,6 +22,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
     }
     
+    [NXRemindCenter sharedInstance];
     return YES;
 }
 
@@ -36,7 +36,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[NXDataStorage sharedInstance] saveContextWhenChanged];
+    [[NXRemindCenter sharedInstance] saveContextWhenChanged];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -52,7 +52,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [[NXDataStorage sharedInstance] saveContextWhenChanged];
+    [[NXRemindCenter sharedInstance] saveContextWhenChanged];
 }
 
 @end

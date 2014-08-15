@@ -9,8 +9,7 @@
 #import "NXPageViewController.h"
 #import "NXModelController.h"
 #import "NXRemindItemsViewController.h"
-#import "NXDataStorage.h"
-#import "Page.h"
+#import "NXRemindCenter.h"
 
 #define DEBUG 1
 
@@ -43,9 +42,9 @@
     }
     self.view.frame = pageViewRect;
     
+    // init first page view
+    NXRemindCenter* storage = [NXRemindCenter sharedInstance];
     NXRemindItemsViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
-
-    NXDataStorage* storage = [NXDataStorage sharedInstance];
     Page* getFirstPage = [storage getPageAtIndex:0];
     startingViewController.titleString = getFirstPage.name;
     startingViewController.number = [getFirstPage.pageNumber unsignedIntegerValue];

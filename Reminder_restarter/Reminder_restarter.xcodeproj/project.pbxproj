@@ -24,9 +24,10 @@
 		651EC82D198F12C800E233B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 651EC806198F12C700E233B0 /* UIKit.framework */; };
 		651EC835198F12C800E233B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 651EC833198F12C800E233B0 /* InfoPlist.strings */; };
 		651EC837198F12C800E233B0 /* Reminder_restarterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 651EC836198F12C800E233B0 /* Reminder_restarterTests.m */; };
+		65AE6E43199CDD64002C5696 /* NXRemindCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AE6E42199CDD64002C5696 /* NXRemindCenter.m */; };
+		65AE6E46199CE62B002C5696 /* RemindItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AE6E45199CE62B002C5696 /* RemindItem.m */; };
+		65AE6E49199CE62B002C5696 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AE6E48199CE62B002C5696 /* Page.m */; };
 		65FEFFCE1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65FEFFCC1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld */; };
-		65FEFFD41990D9270007E10D /* NXDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FEFFD31990D9270007E10D /* NXDataStorage.m */; };
-		65FEFFD71990DAB40007E10D /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FEFFD61990DAB40007E10D /* Page.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,11 +65,13 @@
 		651EC832198F12C800E233B0 /* Reminder_restarterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Reminder_restarterTests-Info.plist"; sourceTree = "<group>"; };
 		651EC834198F12C800E233B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		651EC836198F12C800E233B0 /* Reminder_restarterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reminder_restarterTests.m; sourceTree = "<group>"; };
+		65AE6E41199CDD64002C5696 /* NXRemindCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXRemindCenter.h; sourceTree = "<group>"; };
+		65AE6E42199CDD64002C5696 /* NXRemindCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXRemindCenter.m; sourceTree = "<group>"; };
+		65AE6E44199CE62B002C5696 /* RemindItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindItem.h; sourceTree = "<group>"; };
+		65AE6E45199CE62B002C5696 /* RemindItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindItem.m; sourceTree = "<group>"; };
+		65AE6E47199CE62B002C5696 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
+		65AE6E48199CE62B002C5696 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
 		65FEFFCD1990D7FB0007E10D /* PagedRemindItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PagedRemindItem.xcdatamodel; sourceTree = "<group>"; };
-		65FEFFD21990D9270007E10D /* NXDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXDataStorage.h; sourceTree = "<group>"; };
-		65FEFFD31990D9270007E10D /* NXDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXDataStorage.m; sourceTree = "<group>"; };
-		65FEFFD51990DAB40007E10D /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
-		65FEFFD61990DAB40007E10D /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +131,7 @@
 		651EC808198F12C700E233B0 /* Reminder_restarter */ = {
 			isa = PBXGroup;
 			children = (
-				65FEFFCB1990D79A0007E10D /* DataStorage */,
+				65FEFFCB1990D79A0007E10D /* RemindCenter */,
 				651EC811198F12C700E233B0 /* NXAppDelegate.h */,
 				651EC812198F12C700E233B0 /* NXAppDelegate.m */,
 				651EC814198F12C700E233B0 /* NXPageViewController.h */,
@@ -174,16 +177,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		65FEFFCB1990D79A0007E10D /* DataStorage */ = {
+		65FEFFCB1990D79A0007E10D /* RemindCenter */ = {
 			isa = PBXGroup;
 			children = (
-				65FEFFD51990DAB40007E10D /* Page.h */,
-				65FEFFD61990DAB40007E10D /* Page.m */,
 				65FEFFCC1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld */,
-				65FEFFD21990D9270007E10D /* NXDataStorage.h */,
-				65FEFFD31990D9270007E10D /* NXDataStorage.m */,
+				65AE6E47199CE62B002C5696 /* Page.h */,
+				65AE6E48199CE62B002C5696 /* Page.m */,
+				65AE6E44199CE62B002C5696 /* RemindItem.h */,
+				65AE6E45199CE62B002C5696 /* RemindItem.m */,
+				65AE6E41199CDD64002C5696 /* NXRemindCenter.h */,
+				65AE6E42199CDD64002C5696 /* NXRemindCenter.m */,
 			);
-			name = DataStorage;
+			name = RemindCenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,14 +290,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65AE6E49199CE62B002C5696 /* Page.m in Sources */,
 				651EC819198F12C700E233B0 /* NXRemindItemsViewController.m in Sources */,
 				651EC816198F12C700E233B0 /* NXPageViewController.m in Sources */,
-				65FEFFD41990D9270007E10D /* NXDataStorage.m in Sources */,
 				651EC813198F12C700E233B0 /* NXAppDelegate.m in Sources */,
 				651EC81C198F12C700E233B0 /* NXModelController.m in Sources */,
 				651EC80F198F12C700E233B0 /* main.m in Sources */,
-				65FEFFD71990DAB40007E10D /* Page.m in Sources */,
+				65AE6E43199CDD64002C5696 /* NXRemindCenter.m in Sources */,
 				65FEFFCE1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld in Sources */,
+				65AE6E46199CE62B002C5696 /* RemindItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

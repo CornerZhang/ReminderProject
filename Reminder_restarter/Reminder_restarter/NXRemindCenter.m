@@ -1,15 +1,14 @@
 //
-//  NXDataStorage.m
+//  NXRemindCenter.m
 //  Reminder_restarter
 //
-//  Created by CornerZhang on 14-8-5.
+//  Created by CornerZhang on 14-8-14.
 //  Copyright (c) 2014年 NeXtreme.com. All rights reserved.
 //
 
-#import "NXDataStorage.h"
-#import "Page.h"
+#import "NXRemindCenter.h"
 
-@interface NXDataStorage () <NSFetchedResultsControllerDelegate> {
+@interface NXRemindCenter ()  <NSFetchedResultsControllerDelegate> {
     
 }
 @property (nonatomic, strong) NSFetchedResultsController* frc;
@@ -17,9 +16,9 @@
 
 @end
 
-static NXDataStorage* only = nil;
+static NXRemindCenter* only = nil;
 
-@implementation NXDataStorage
+@implementation NXRemindCenter
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -27,7 +26,7 @@ static NXDataStorage* only = nil;
 + (instancetype) sharedInstance {
     @synchronized(self) {
         if (only==nil) {
-            only = [[NXDataStorage alloc] init];
+            only = [[NXRemindCenter alloc] init];
         }
     }
     return only;
@@ -55,15 +54,41 @@ static NXDataStorage* only = nil;
     
     self.frc.delegate = self;
     
-    NSError *fetchingError = nil;
-    if ([self.frc performFetch:&fetchingError]){
-        NSLog(@"Successfully fetched.");
-    } else {
-        NSLog(@"Failed to fetch.");
-    }
-        
     NSLog(@"RMStorageManager msg: %@",NSStringFromSelector(_cmd));
+    
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        // create 6 new pages & blank remindItem
+        for (int i=0; i<6; ++i) {
+            Page* newPage = [self createBlankPage];
+            newPage.name = [NSString stringWithFormat:@"新页 %d", i+1];
+            newPage.pageNumber = [NSNumber numberWithUnsignedInteger:i+1];
+        }
+        [self saveContextWhenChanged];
+	}
+
+	[self fetchResults];
+
     return self;
+}
+
+- (NXRemindMessage*)findMessageByName:(NSString*)name {
+    return nil;
+}
+
+- (NXRemindMessage*)createBlankMessage:(NSString*)name {
+    return nil;
+}
+
+- (void)		postMessage:(NXRemindMessage*)msg {
+    
+}
+
+- (void)		cancelMessage:(NXRemindMessage*)msg {
+    
+}
+
+- (void)		cancelAllMessages {
+    
 }
 
 - (BOOL)isEmpty {
@@ -72,6 +97,15 @@ static NXDataStorage* only = nil;
     }
     
     return NO;
+}
+
+- (void)fetchResults {
+    NSError *fetchingError = nil;
+    if ([self.frc performFetch:&fetchingError]){
+        NSLog(@"Successfully fetched.");
+    } else {
+        NSLog(@"Failed to fetch.");
+    }
 }
 
 - (void)saveContextWhenChanged
