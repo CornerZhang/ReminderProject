@@ -8,11 +8,13 @@
 
 #import "NXRemindItemsViewController.h"
 
+
 @interface NXRemindItemsViewController ()
 
 @end
 
 @implementation NXRemindItemsViewController
+@synthesize tableView;
 @synthesize titleString;
 @synthesize number;
 
@@ -36,4 +38,11 @@
     self.pageNumber.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.number];
 }
 
+- (IBAction)tapEdit:(UIButton *)sender {
+    if (self.tableView.editing) {
+        [self.tableView setEditing:NO animated:YES];
+    }else{
+        [self.tableView setEditing:YES animated:YES];
+    }
+}
 @end

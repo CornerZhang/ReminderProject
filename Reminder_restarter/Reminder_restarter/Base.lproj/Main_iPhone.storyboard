@@ -37,6 +37,9 @@
                                 <state key="normal" title="编辑">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tapEdit:" destination="hzS-jB-y9W" eventType="touchUpInside" id="nFw-3Z-kHU"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="新页" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HdB-in-0Up">
                                 <rect key="frame" x="20" y="20" width="213" height="17"/>
@@ -64,7 +67,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="早起" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hG3-My-l6q">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="早起" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hG3-My-l6q">
                                                     <rect key="frame" x="20" y="13" width="240" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -77,15 +80,15 @@
                                             <outlet property="zoneRepeatTime" destination="iyx-5J-yAm" id="xHm-x4-790"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RemindItemCell_add" rowHeight="73" id="abw-fr-ID5" customClass="NXRemindItemTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RemindItemCell_add" rowHeight="73" id="abw-fr-ID5" customClass="NXRemindItemAddTableViewCell">
                                         <rect key="frame" x="0.0" y="95" width="280" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="abw-fr-ID5" id="VmS-Er-Fl2">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="njV-gw-Bcm">
-                                                    <rect key="frame" x="20" y="21" width="240" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="njV-gw-Bcm">
+                                                    <rect key="frame" x="20" y="21" width="205" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -94,7 +97,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="titleInput" destination="njV-gw-Bcm" id="OjV-GU-R1i"/>
+                                            <outlet property="titleInputAdd" destination="njV-gw-Bcm" id="DYi-x0-MI8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -112,6 +115,7 @@
                     <connections>
                         <outlet property="pageName" destination="HdB-in-0Up" id="iDS-Ab-Kpm"/>
                         <outlet property="pageNumber" destination="Mnn-X8-FRQ" id="JEl-9p-InM"/>
+                        <outlet property="tableView" destination="jww-C5-5So" id="3wV-CE-mM7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHE-GN-Yf3" sceneMemberID="firstResponder"/>

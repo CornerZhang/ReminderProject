@@ -29,6 +29,7 @@
 		65AE6E49199CE62B002C5696 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AE6E48199CE62B002C5696 /* Page.m */; };
 		65F61435199E0CDE0056EAC7 /* NXRemindTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F61434199E0CDE0056EAC7 /* NXRemindTableView.m */; };
 		65F61438199E0DA10056EAC7 /* NXRemindItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F61437199E0DA10056EAC7 /* NXRemindItemTableViewCell.m */; };
+		65F6143C199E3F930056EAC7 /* NXRemindItemAddTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6143B199E3F930056EAC7 /* NXRemindItemAddTableViewCell.m */; };
 		65FEFFCE1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65FEFFCC1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,8 @@
 		65F61434199E0CDE0056EAC7 /* NXRemindTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXRemindTableView.m; sourceTree = "<group>"; };
 		65F61436199E0DA10056EAC7 /* NXRemindItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXRemindItemTableViewCell.h; sourceTree = "<group>"; };
 		65F61437199E0DA10056EAC7 /* NXRemindItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXRemindItemTableViewCell.m; sourceTree = "<group>"; };
+		65F6143A199E3F930056EAC7 /* NXRemindItemAddTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXRemindItemAddTableViewCell.h; sourceTree = "<group>"; };
+		65F6143B199E3F930056EAC7 /* NXRemindItemAddTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXRemindItemAddTableViewCell.m; sourceTree = "<group>"; };
 		65FEFFCD1990D7FB0007E10D /* PagedRemindItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PagedRemindItem.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +190,8 @@
 			children = (
 				65F61436199E0DA10056EAC7 /* NXRemindItemTableViewCell.h */,
 				65F61437199E0DA10056EAC7 /* NXRemindItemTableViewCell.m */,
+				65F6143A199E3F930056EAC7 /* NXRemindItemAddTableViewCell.h */,
+				65F6143B199E3F930056EAC7 /* NXRemindItemAddTableViewCell.m */,
 				65F61433199E0CDE0056EAC7 /* NXRemindTableView.h */,
 				65F61434199E0CDE0056EAC7 /* NXRemindTableView.m */,
 				651EC817198F12C700E233B0 /* NXRemindItemsViewController.h */,
@@ -317,6 +322,7 @@
 				651EC81C198F12C700E233B0 /* NXModelController.m in Sources */,
 				651EC80F198F12C700E233B0 /* main.m in Sources */,
 				65AE6E43199CDD64002C5696 /* NXRemindCenter.m in Sources */,
+				65F6143C199E3F930056EAC7 /* NXRemindItemAddTableViewCell.m in Sources */,
 				65FEFFCE1990D7FB0007E10D /* PagedRemindItem.xcdatamodeld in Sources */,
 				65AE6E46199CE62B002C5696 /* RemindItem.m in Sources */,
 			);
