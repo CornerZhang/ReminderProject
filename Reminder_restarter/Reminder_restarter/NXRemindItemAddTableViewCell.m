@@ -23,7 +23,6 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.titleInputAdd.delegate = self;
     }
     return self;
 }
@@ -40,9 +39,5 @@
     // Configure the view for the selected state
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
-}
 
 @end

@@ -87,7 +87,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="njV-gw-Bcm">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="njV-gw-Bcm" customClass="NXTailAddTextField">
                                                     <rect key="frame" x="20" y="21" width="205" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,7 +97,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="titleInputAdd" destination="njV-gw-Bcm" id="DYi-x0-MI8"/>
+                                            <outlet property="titleInputAdd" destination="njV-gw-Bcm" id="ECW-8B-aZp"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

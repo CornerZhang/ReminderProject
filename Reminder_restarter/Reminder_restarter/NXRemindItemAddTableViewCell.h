@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NXTailAddTextField.h"
 
-@interface NXRemindItemAddTableViewCell : UITableViewCell <UITextFieldDelegate>
-@property (strong, nonatomic) IBOutlet UITextField *titleInputAdd;
+@interface NXRemindItemAddTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet NXTailAddTextField *titleInputAdd;
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField;
 @end
